@@ -146,7 +146,8 @@ export default function DashboardPage() {
       await loadData();
     } catch (error) {
       console.error('Error deleting item:', error);
-      alert(`Failed to delete ${type}. Error: ${error.message || 'Unknown error'}`);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      alert(`Failed to delete ${type}. Error: ${errorMessage}`);
     }
   };
 
