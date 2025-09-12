@@ -1,26 +1,240 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0B0F12;
+    --foreground: #FFFFFF;
+    --accent: #3B82F6;
+    --highlight: #00D4A0;
+    --muted: #6B7280;
+  }
+
+  * {
+    @apply border-gray-800;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1f2937;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #3B82F6;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2563EB;
+  }
+
+  /* Firefox scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #3B82F6 #1f2937;
+  }
+
+  /* Print styles for resume */
+  @media print {
+    * {
+      -webkit-print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+    
+    body {
+      background: white !important;
+      color: black !important;
+      font-size: 12pt;
+      line-height: 1.4;
+    }
+    
+    .print\\:hidden {
+      display: none !important;
+    }
+    
+    .print\\:shadow-none {
+      box-shadow: none !important;
+    }
+    
+    .print\\:rounded-none {
+      border-radius: 0 !important;
+    }
+    
+    /* Hide all non-essential elements */
+    nav, footer, .btn, button, .print\\:hidden {
+      display: none !important;
+    }
+    
+    /* Resume container */
+    #resume-content {
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      background: white !important;
+    }
+    
+    /* Typography for print */
+    h1 {
+      font-size: 24pt !important;
+      color: black !important;
+      margin: 0 0 8pt 0 !important;
+      page-break-after: avoid;
+    }
+    
+    h2 {
+      font-size: 18pt !important;
+      color: black !important;
+      margin: 16pt 0 8pt 0 !important;
+      page-break-after: avoid;
+      border-bottom: 1pt solid #333 !important;
+      padding-bottom: 2pt !important;
+    }
+    
+    h3 {
+      font-size: 14pt !important;
+      color: black !important;
+      margin: 12pt 0 4pt 0 !important;
+      page-break-after: avoid;
+    }
+    
+    h4 {
+      font-size: 12pt !important;
+      color: black !important;
+      margin: 8pt 0 4pt 0 !important;
+      page-break-after: avoid;
+    }
+    
+    p, li, span, div {
+      color: black !important;
+      font-size: 11pt !important;
+      line-height: 1.3 !important;
+    }
+    
+    /* Contact info styling */
+    .contact-info {
+      text-align: center !important;
+      margin-bottom: 16pt !important;
+    }
+    
+    .contact-info h1 {
+      font-size: 20pt !important;
+      margin-bottom: 4pt !important;
+    }
+    
+    .contact-info p {
+      font-size: 10pt !important;
+      margin: 2pt 0 !important;
+    }
+    
+    /* Section spacing */
+    .resume-section {
+      page-break-inside: avoid;
+      margin-bottom: 12pt !important;
+    }
+    
+    /* Experience entries */
+    .experience-entry {
+      margin-bottom: 8pt !important;
+      page-break-inside: avoid;
+    }
+    
+    .experience-entry h4 {
+      margin: 0 0 2pt 0 !important;
+    }
+    
+    .experience-entry p {
+      margin: 2pt 0 !important;
+    }
+    
+    /* Skills grid */
+    .skills-grid {
+      display: block !important;
+    }
+    
+    .skills-category {
+      margin-bottom: 6pt !important;
+      page-break-inside: avoid;
+    }
+    
+    /* Projects */
+    .project-entry {
+      margin-bottom: 6pt !important;
+      page-break-inside: avoid;
+    }
+    
+    /* Links */
+    a {
+      color: black !important;
+      text-decoration: none !important;
+    }
+    
+    /* A4 page size and margins */
+    @page {
+      size: A4;
+      margin: 0.75in 0.5in;
+    }
+    
+    /* Page breaks */
+    .page-break {
+      page-break-before: always;
+    }
+    
+    /* Avoid breaking these elements */
+    .no-break {
+      page-break-inside: avoid;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .btn-primary {
+    @apply bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-[1.02];
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border-2 border-accent text-accent hover:bg-accent hover:text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-[1.02];
+  }
+
+  .card {
+    @apply bg-background/50 border border-gray-800 rounded-lg p-6 transition-all duration-200 hover:scale-[1.02] hover:border-accent/50;
+  }
+
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 py-12 lg:py-16;
+  }
+
+  .container-max {
+    @apply max-w-6xl mx-auto;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B0F12;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7C5CFF;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6B46E5;
 }
