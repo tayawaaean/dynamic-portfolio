@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Section from '@/components/Section';
-import Card from '@/components/Card';
+import ProjectCard from '@/components/ProjectCard';
 import Button from '@/components/Button';
 import ExpandableText from '@/components/ExpandableText';
 import { supabase, Project } from '@/lib/supabaseClient';
@@ -75,86 +75,7 @@ export default async function ProjectsPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project: Project) => (
-            <Card key={project.id} className="flex flex-col h-full overflow-hidden">
-              {/* Project Image */}
-              {project.image_url && (
-                <div className="w-full aspect-[16/9] mb-4 rounded-md overflow-hidden">
-                  <img
-                    src={project.image_url}
-                    alt={project.title}
-                    className="w-full h-full object-cover object-center mx-auto"
-                  />
-                </div>
-              )}
-              
-              <div className={project.image_url ? '' : 'pt-6'}>
-                {project.featured && (
-                  <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-accent/10 text-accent mb-4 w-fit">
-                    Featured
-                  </div>
-                )}
-                
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-xl font-bold text-foreground flex-1">
-                    {project.title}
-                  </h3>
-                  {project.work_type && (
-                    <span className="ml-2 px-2 py-1 bg-highlight/10 text-highlight text-xs rounded-full flex-shrink-0">
-                      {project.work_type}
-                    </span>
-                  )}
-                </div>
-              
-                <ExpandableText 
-                  text={project.description_markdown}
-                  maxLength={150}
-                  className="mb-4"
-                />
-                
-                <div className="mb-4">
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech_stack.slice(0, 4).map((tech: string) => (
-                      <span
-                        key={tech}
-                        className="px-2 py-1 text-xs font-medium bg-highlight/10 text-highlight rounded-md"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {project.tech_stack.length > 4 && (
-                      <span className="px-2 py-1 text-xs font-medium bg-muted/10 text-muted rounded-md">
-                        +{project.tech_stack.length - 4} more
-                      </span>
-                    )}
-                  </div>
-                </div>
-                
-                <div className="flex gap-3 mt-auto">
-                  {project.live_url && (
-                    <Button
-                      href={project.live_url}
-                      target="_blank"
-                      variant="primary"
-                      size="sm"
-                      className="flex-1"
-                    >
-                      Live Demo
-                    </Button>
-                  )}
-                  {project.repo_url && (
-                    <Button
-                      href={project.repo_url}
-                      target="_blank"
-                      variant="secondary"
-                      size="sm"
-                      className="flex-1"
-                    >
-                      Code
-                    </Button>
-                  )}
-                </div>
-              </div>
-            </Card>
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
 

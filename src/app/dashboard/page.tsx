@@ -700,63 +700,200 @@ function SkillsTab({
   onCreate: () => void, 
   onDelete: (id: string) => void 
 }) {
+  const [viewMode, setViewMode] = useState<'compact' | 'detailed'>('compact');
+  
   const groupedSkills = skills.reduce((acc, skill) => {
     if (!acc[skill.category]) acc[skill.category] = [];
     acc[skill.category].push(skill);
     return acc;
   }, {} as Record<string, Skill[]>);
 
+  const getLevelColor = (level: number) => {
+    if (level >= 5) return 'from-emerald-500 to-green-400';
+    if (level >= 4) return 'from-blue-500 to-cyan-400';
+    if (level >= 3) return 'from-yellow-500 to-orange-400';
+    if (level >= 2) return 'from-orange-500 to-red-400';
+    return 'from-red-500 to-pink-400';
+  };
+
+  const getLevelLabel = (level: number) => {
+    const labels = { 1: 'Beginner', 2: 'Novice', 3: 'Intermediate', 4: 'Advanced', 5: 'Expert' };
+    return labels[level as keyof typeof labels] || 'Intermediate';
+  };
+
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold text-foreground">Skills Management</h2>
-        <Button variant="primary" size="sm" onClick={onCreate}>
-          Add Skill
-        </Button>
+        <h2 className="text-xl font-bold text-foreground">Skills Management ({skills.length})</h2>
+        <div className="flex gap-2">
+          <div className="flex bg-background border border-gray-700 rounded-lg p-1">
+            <button
+              onClick={() => setViewMode('compact')}
+              className={`px-3 py-1 text-sm rounded transition-colors ${
+                viewMode === 'compact' 
+                  ? 'bg-accent text-white' 
+                  : 'text-muted hover:text-foreground'
+              }`}
+            >
+              Compact
+            </button>
+            <button
+              onClick={() => setViewMode('detailed')}
+              className={`px-3 py-1 text-sm rounded transition-colors ${
+                viewMode === 'detailed' 
+                  ? 'bg-accent text-white' 
+                  : 'text-muted hover:text-foreground'
+              }`}
+            >
+              Detailed
+            </button>
+          </div>
+          <Button variant="primary" size="sm" onClick={onCreate}>
+            Add Skill
+          </Button>
+        </div>
       </div>
       
-      <div className="grid gap-6">
-        {Object.entries(groupedSkills).map(([category, categorySkills]: [string, Skill[]]) => (
-          <Card key={category}>
-            <h3 className="font-bold text-foreground mb-3">{category}</h3>
-            <div className="grid gap-2">
-              {categorySkills.map((skill: Skill) => (
-                <div key={skill.id} className="flex justify-between items-center">
-                  <div className="flex-1">
-                    <span className="text-foreground">{skill.name}</span>
-                    <div className="w-full bg-gray-700 rounded-full h-2 mt-1">
-                      <div
-                        className="bg-gradient-to-r from-accent to-highlight h-2 rounded-full"
-                        style={{ width: `${(skill.level / 5) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 ml-4">
-                    <span className="text-muted text-sm">{skill.level}/5</span>
-                    <Button variant="ghost" size="sm" onClick={() => onEdit(skill)}>
-                      Edit
-                    </Button>
-                    <Button variant="ghost" size="sm" onClick={() => onDelete(skill.id)}>
-                      Delete
-                    </Button>
+      {viewMode === 'compact' ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {skills.map((skill: any) => (
+            <Card key={skill.id} className="hover:border-accent/50 transition-colors">
+              <div className="flex justify-between items-start mb-2">
+                <div>
+                  <h4 className="font-semibold text-foreground">{skill.name}</h4>
+                  <p className="text-xs text-muted">{skill.category}</p>
+                </div>
+                <div className="text-right">
+                  <span className="text-sm text-accent">{getLevelLabel(skill.level)}</span>
+                  {skill.years_experience && (
+                    <p className="text-xs text-muted">{skill.years_experience}y</p>
+                  )}
+                </div>
+              </div>
+              
+              <div className="mb-3">
+                <div className="w-full bg-gray-800 rounded-full h-2">
+                  <div
+                    className={`bg-gradient-to-r ${getLevelColor(skill.level)} h-2 rounded-full transition-all duration-500`}
+                    style={{ width: `${(skill.level / 5) * 100}%` }}
+                  />
+                </div>
+              </div>
+              
+              {skill.description && (
+                <p className="text-sm text-muted mb-3 line-clamp-2">{skill.description}</p>
+              )}
+              
+              {skill.projects_used && skill.projects_used.length > 0 && (
+                <div className="mb-3">
+                  <div className="flex flex-wrap gap-1">
+                    {skill.projects_used.slice(0, 2).map((project: string, index: number) => (
+                      <span key={index} className="px-2 py-1 text-xs bg-accent/10 text-accent rounded-md">
+                        {project}
+                      </span>
+                    ))}
+                    {skill.projects_used.length > 2 && (
+                      <span className="px-2 py-1 text-xs bg-muted/10 text-muted rounded-md">
+                        +{skill.projects_used.length - 2}
+                      </span>
+                    )}
                   </div>
                 </div>
-              ))}
-            </div>
-          </Card>
-        ))}
-        
-        {skills.length === 0 && (
-          <Card>
-            <div className="text-center py-8">
-              <p className="text-muted mb-4">No skills yet. Add your technical expertise!</p>
-              <Button variant="primary" size="sm" onClick={onCreate}>
-                Add Skill
-              </Button>
-            </div>
-          </Card>
-        )}
-      </div>
+              )}
+              
+              <div className="flex gap-2">
+                <Button variant="ghost" size="sm" onClick={() => onEdit(skill)} className="flex-1">
+                  Edit
+                </Button>
+                <Button variant="ghost" size="sm" onClick={() => onDelete(skill.id)} className="flex-1">
+                  Delete
+                </Button>
+              </div>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <div className="grid gap-6">
+          {Object.entries(groupedSkills).map(([category, categorySkills]: [string, any[]]) => (
+            <Card key={category}>
+              <h3 className="font-bold text-foreground mb-4 flex items-center">
+                <span className="w-3 h-3 bg-accent rounded-full mr-3"></span>
+                {category} ({categorySkills.length})
+              </h3>
+              <div className="grid gap-4">
+                {categorySkills.map((skill: any) => (
+                  <div key={skill.id} className="border border-gray-800 rounded-lg p-4">
+                    <div className="flex justify-between items-start mb-3">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <h4 className="font-semibold text-foreground">{skill.name}</h4>
+                          <span className="px-2 py-1 bg-accent/10 text-accent text-xs rounded-full">
+                            {getLevelLabel(skill.level)}
+                          </span>
+                          {skill.years_experience && (
+                            <span className="px-2 py-1 bg-highlight/10 text-highlight text-xs rounded-full">
+                              {skill.years_experience} years
+                            </span>
+                          )}
+                          {skill.last_used && (
+                            <span className="px-2 py-1 bg-muted/10 text-muted text-xs rounded-full">
+                              Last used: {skill.last_used}
+                            </span>
+                          )}
+                        </div>
+                        
+                        <div className="w-full bg-gray-800 rounded-full h-2 mb-3">
+                          <div
+                            className={`bg-gradient-to-r ${getLevelColor(skill.level)} h-2 rounded-full transition-all duration-500`}
+                            style={{ width: `${(skill.level / 5) * 100}%` }}
+                          />
+                        </div>
+                        
+                        {skill.description && (
+                          <p className="text-sm text-muted mb-3">{skill.description}</p>
+                        )}
+                        
+                        {skill.projects_used && skill.projects_used.length > 0 && (
+                          <div>
+                            <h5 className="text-sm font-medium text-foreground mb-2">Projects:</h5>
+                            <div className="flex flex-wrap gap-2">
+                              {skill.projects_used.map((project: string, index: number) => (
+                                <span key={index} className="px-2 py-1 text-xs bg-accent/10 text-accent rounded-md">
+                                  {project}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      
+                      <div className="flex gap-2 ml-4">
+                        <Button variant="ghost" size="sm" onClick={() => onEdit(skill)}>
+                          Edit
+                        </Button>
+                        <Button variant="ghost" size="sm" onClick={() => onDelete(skill.id)}>
+                          Delete
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          ))}
+        </div>
+      )}
+      
+      {skills.length === 0 && (
+        <Card>
+          <div className="text-center py-8">
+            <p className="text-muted mb-4">No skills yet. Add your technical expertise!</p>
+            <Button variant="primary" size="sm" onClick={onCreate}>
+              Add Skill
+            </Button>
+          </div>
+        </Card>
+      )}
     </div>
   );
 }

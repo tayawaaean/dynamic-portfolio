@@ -29,7 +29,11 @@ export default function SkillForm({ skill, onSave, onCancel }: SkillFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     category: '',
-    level: 3
+    level: 3,
+    years_experience: 1,
+    description: '',
+    projects_used: '',
+    last_used: new Date().getFullYear().toString()
   });
 
   useEffect(() => {
@@ -37,15 +41,19 @@ export default function SkillForm({ skill, onSave, onCancel }: SkillFormProps) {
       setFormData({
         name: skill.name,
         category: skill.category,
-        level: skill.level
+        level: skill.level,
+        years_experience: (skill as any).years_experience || 1,
+        description: (skill as any).description || '',
+        projects_used: (skill as any).projects_used?.join(', ') || '',
+        last_used: (skill as any).last_used || new Date().getFullYear().toString()
       });
     }
   }, [skill]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
     
-    if (type === 'range' || name === 'level') {
+    if (type === 'range' || name === 'level' || name === 'years_experience') {
       setFormData(prev => ({ ...prev, [name]: parseInt(value) }));
     } else {
       setFormData(prev => ({ ...prev, [name]: value }));
@@ -60,7 +68,11 @@ export default function SkillForm({ skill, onSave, onCancel }: SkillFormProps) {
       const skillData = {
         name: formData.name,
         category: formData.category,
-        level: formData.level
+        level: formData.level,
+        years_experience: formData.years_experience,
+        description: formData.description,
+        projects_used: formData.projects_used.split(',').map(p => p.trim()).filter(p => p),
+        last_used: formData.last_used
       };
 
       let error;
@@ -176,6 +188,79 @@ export default function SkillForm({ skill, onSave, onCancel }: SkillFormProps) {
             {formData.level === 5 && 'Expert level, can teach others and solve complex problems'}
           </p>
         </div>
+      </div>
+
+      {/* Years of Experience */}
+      <div>
+        <label className="block text-foreground font-medium mb-2">
+          Years of Experience: {formData.years_experience} {formData.years_experience === 1 ? 'year' : 'years'}
+        </label>
+        <input
+          type="range"
+          name="years_experience"
+          min="0"
+          max="10"
+          step="0.5"
+          value={formData.years_experience}
+          onChange={handleInputChange}
+          className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider"
+        />
+        <div className="flex justify-between text-xs text-muted mt-1">
+          <span>0</span>
+          <span>2</span>
+          <span>4</span>
+          <span>6</span>
+          <span>8</span>
+          <span>10+</span>
+        </div>
+      </div>
+
+      {/* Description */}
+      <div>
+        <label className="block text-foreground font-medium mb-2">
+          Description
+        </label>
+        <textarea
+          name="description"
+          value={formData.description}
+          onChange={handleInputChange}
+          rows={3}
+          className="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg focus:outline-none focus:border-accent text-foreground resize-none"
+          placeholder="Brief description of how you use this skill..."
+        />
+      </div>
+
+      {/* Projects Used */}
+      <div>
+        <label className="block text-foreground font-medium mb-2">
+          Projects Used (comma-separated)
+        </label>
+        <input
+          type="text"
+          name="projects_used"
+          value={formData.projects_used}
+          onChange={handleInputChange}
+          className="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg focus:outline-none focus:border-accent text-foreground"
+          placeholder="Project A, Project B, Project C"
+        />
+        <p className="text-xs text-muted mt-1">
+          List the projects where you've used this skill
+        </p>
+      </div>
+
+      {/* Last Used */}
+      <div>
+        <label className="block text-foreground font-medium mb-2">
+          Last Used (Year)
+        </label>
+        <input
+          type="text"
+          name="last_used"
+          value={formData.last_used}
+          onChange={handleInputChange}
+          className="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg focus:outline-none focus:border-accent text-foreground"
+          placeholder="2024"
+        />
       </div>
 
       {/* Actions */}

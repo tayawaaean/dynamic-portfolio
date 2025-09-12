@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   description: "Portfolio of Aean Gabrielle Tayawa - Full Stack Developer specializing in modern web technologies, IoT, and scalable applications.",
   keywords: ["Full Stack Developer", "React", "Next.js", "TypeScript", "Node.js", "IoT", "Web Development"],
   authors: [{ name: "Aean Gabrielle Tayawa" }],
+  icons: {
+    icon: "/headshot.png",
+    shortcut: "/headshot.png",
+    apple: "/headshot.png",
+  },
   openGraph: {
     title: "Aean Gabrielle Tayawa - Full Stack Developer",
     description: "Portfolio showcasing modern web development projects and expertise",
