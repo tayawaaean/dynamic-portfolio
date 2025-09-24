@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { supabase } from '@/lib/supabaseClient';
+import ImageWithLoader from './ImageWithLoader';
 
 interface ImageUploadProps {
   value?: string;
@@ -140,10 +141,11 @@ export default function ImageUpload({
     <div className="space-y-4">
       {value ? (
         <div className="relative">
-          <img
+          <ImageWithLoader
             src={value}
             alt="Uploaded image"
-            className="w-full h-48 object-cover rounded-lg border border-gray-700"
+            containerClassName="w-full h-48 rounded-lg border border-gray-700 overflow-hidden"
+            className="w-full h-full object-cover"
           />
           <button
             onClick={removeImage}

@@ -5,6 +5,7 @@ import Card from './Card';
 import Button from './Button';
 import Modal from './Modal';
 import { Project } from '@/lib/supabaseClient';
+import ImageWithLoader from './ImageWithLoader';
 
 interface ProjectCardProps {
   project: Project;
@@ -18,13 +19,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <Card className="flex flex-col h-full overflow-hidden">
         {/* Project Image */}
         {project.image_url && (
-          <div className="w-full aspect-[16/9] mb-4 rounded-md overflow-hidden">
-            <img
-              src={project.image_url}
-              alt={project.title}
-              className="w-full h-full object-cover object-center mx-auto"
-            />
-          </div>
+          <ImageWithLoader
+            src={project.image_url}
+            alt={project.title}
+            containerClassName="w-full aspect-[16/9] mb-4 rounded-md overflow-hidden"
+            className="w-full h-full object-cover object-center mx-auto"
+          />
         )}
 
         <div className={`${project.image_url ? '' : 'pt-6'} flex-1 flex flex-col`}>
@@ -100,13 +100,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <div className="space-y-4 flex flex-col min-h-[320px]">
           {/* Image */}
           {project.image_url && (
-            <div className="w-full rounded-md overflow-hidden">
-              <img
-                src={project.image_url}
-                alt={project.title}
-                className="w-full h-auto object-cover"
-              />
-            </div>
+            <ImageWithLoader
+              src={project.image_url}
+              alt={project.title}
+              containerClassName="w-full rounded-md overflow-hidden"
+              className="w-full h-auto object-cover"
+            />
           )}
           {/* Tech stack */}
           {project.tech_stack && project.tech_stack.length > 0 && (

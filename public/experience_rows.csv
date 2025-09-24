@@ -1,0 +1,29 @@
+id,company,role,start_date,end_date,description_markdown,created_at,updated_at
+75c25185-bd5a-4f32-895b-99567efb9d8a,Mariano Marcos State University,Science Research Analyst ( Full Stack Developer ),2024-10-14,,"• Led architecture and deployment of 5 comprehensive IoT + MERN stack systems for agricultural
+automation, achieving 99.9% uptime across distributed deployments.
+• Built real-time data pipelines processing continuous sensor streams via MQTT, Node.js, and MongoDB for
+24/7 remote monitoring.
+• Engineered containerized applications with Docker and deployed on Ubuntu servers with NGINX.
+• Developed embedded systems in C++ with custom PCB design for automated irrigation and climate control.
+• Delivered 3 government-recognized platforms including DOE-adopted ARECGIS serving 1000+ renewable energy installations nationwide.
+
+Key Projects:
+• Solar Pump Analytics Platform: MERN dashboard with PVWatts API integration and CO₂ emissions
+calculator for policy analysis.
+• ARECGIS Platform: React.js/Node.js GIS system officially adopted by multiple State Universities
+nationwide.
+• AREC SRVA Mobile App: React Native + Firebase survey tool reducing research paperwork by 50%.",2025-09-12 05:02:15.948345+00,2025-09-12 05:06:45.33351+00
+eb42223e-d721-4422-ad32-959a0d77e054,"Build Optimal Yet Efficient Technology Solutions ",Founder & Full Stack Developer,2025-08-01,,"•  Founded and scaled a technology solutions startup delivering custom eCommerce platforms, SaaS applications, CRMs, CMS systems, and enterprise-grade web solutions.
+•  Led a cross-functional team of senior DevOps engineers, full stack developers, GIS specialists, and app developers to deliver end-to-end projects across diverse industries.
+•  Designed and deployed scalable and secure architectures using Next.js, React, Node.js, TypeScript, Tailwind, Docker, Kubernetes, and cloud platforms such as AWS, Google Cloud, Azure, Vercel, Supabase, Firebase, and DigitalOcean.
+•  Built and launched custom eCommerce solutions with Shopify, WooCommerce, and headless commerce setups, integrating Stripe, PayPal, and other third-party payment gateways.
+•  Developed and integrated APIs (REST & GraphQL), and connected external services like Google Maps, Twilio, and SendGrid to enhance application functionality.
+•  Delivered custom ERP and CRM systems, including WordPress and HubSpot integrations, to streamline business operations for clients.
+•  Established Agile workflows and fostered efficient remote collaboration using Jira, Trello, Asana, and Slack.
+•  Oversaw DevOps pipelines with GitHub Actions and GitLab CI/CD, ensuring smooth deployments, continuous integration, and reliable scaling.
+•  Drove business growth by managing client relationships, project planning, and technical execution, ensuring delivery of robust, maintainable, and future-proof software solutions.
+",2025-09-12 05:05:46.524119+00,2025-09-12 05:10:01.913073+00
+f599e759-fce1-4762-a24a-5ce2f9c116bf,Tayawa Tolentino CPAs and Company,Full Stack Development Intern,2023-06-12,2023-08-06,"• Developed internal portal using PHP, JavaScript, and MySQL with 6 modules for document tracking and task management
+• Improved operational efficiency by 40% through automation of manual processes
+• Deployed responsive WordPress website boosting client inquiries by 25% in 2 months
+• Configured production environment on Hostinger with DNS, FTP, and MySQL achieving 100% uptime",2025-09-12 04:59:22.589788+00,2025-09-12 05:09:38.097142+00

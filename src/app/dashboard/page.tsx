@@ -14,6 +14,7 @@ import SkillForm from '@/components/SkillForm';
 // ResumeSectionForm removed - using static resume.pdf instead
 import Pagination from '@/components/Pagination';
 import ProjectFilter from '@/components/ProjectFilter';
+import ImageWithLoader from '@/components/ImageWithLoader';
 
 interface User {
   id: string;
@@ -546,10 +547,11 @@ function ProjectsTab({
           <Card key={project.id}>
             <div className="flex gap-4">
               {project.image_url && (
-                <img
+                <ImageWithLoader
                   src={project.image_url}
                   alt={project.title}
-                  className="w-24 h-16 object-cover rounded border border-gray-700 flex-shrink-0"
+                  containerClassName="w-24 h-16 rounded border border-gray-700 flex-shrink-0 overflow-hidden"
+                  className="w-full h-full object-cover"
                 />
               )}
               <div className="flex-1 min-w-0">
