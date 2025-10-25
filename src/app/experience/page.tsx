@@ -3,6 +3,10 @@ import Section from '@/components/Section';
 import Card from '@/components/Card';
 import { supabase, Experience } from '@/lib/supabaseClient';
 
+// Enable Incremental Static Regeneration - revalidate every 60 seconds
+// This ensures the page updates within 1 minute of admin changes without needing redeployment
+export const revalidate = 60;
+
 // Default experience data
 const defaultExperience: Experience[] = [
   {

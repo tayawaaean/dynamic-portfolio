@@ -2,6 +2,10 @@ import React from 'react';
 import Hero from '@/components/Hero';
 import { supabase } from '@/lib/supabaseClient';
 
+// Enable Incremental Static Regeneration - revalidate every 60 seconds
+// This ensures the page updates within 1 minute of admin changes without needing redeployment
+export const revalidate = 60;
+
 // Default data in case Supabase is not configured yet
 const defaultProfile = {
   name: "Aean Gabrielle Tayawa",

@@ -6,6 +6,10 @@ import Button from '@/components/Button';
 import ExpandableText from '@/components/ExpandableText';
 import { supabase, Project } from '@/lib/supabaseClient';
 
+// Enable Incremental Static Regeneration - revalidate every 60 seconds
+// This ensures the page updates within 1 minute of admin changes without needing redeployment
+export const revalidate = 60;
+
 // Default projects data
 const defaultProjects: Project[] = [
   {
