@@ -73,7 +73,7 @@ export default async function ProjectsPage() {
             My Projects
           </h1>
           <p className="text-xl text-muted max-w-3xl mx-auto">
-            A showcase of my work, featuring web applications, IoT solutions, and innovative projects built with modern technologies.
+            A showcase of my work as a remote Full Stack Developer, featuring web applications, IoT solutions, and innovative projects built for clients and teams across the Philippines and worldwide.
           </p>
         </div>
 

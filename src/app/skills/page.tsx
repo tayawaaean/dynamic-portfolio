@@ -264,7 +264,7 @@ export default function SkillsPage() {
             Skills & Expertise
           </h1>
           <p className="text-xl text-muted max-w-3xl mx-auto">
-            A comprehensive overview of my technical skills, experience levels, and real-world applications across different technologies.
+            A comprehensive overview of my full stack skill set used to build production-ready applications for international clients while working remotely from Ilocos Norte, Philippines.
           </p>
         </div>
 

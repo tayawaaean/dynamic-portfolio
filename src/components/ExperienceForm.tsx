@@ -172,16 +172,15 @@ export default function ExperienceForm({ experience, onSave, onCancel }: Experie
         </label>
       </div>
 
-      {/* Description */}
+      {/* Description (optional) */}
       <div>
         <label className="block text-foreground font-medium mb-2">
-          Job Description (Markdown) *
+          Job Description (Markdown)
         </label>
         <textarea
           name="description_markdown"
           value={formData.description_markdown}
           onChange={handleInputChange}
-          required
           rows={10}
           className="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg focus:outline-none focus:border-accent text-foreground resize-vertical"
           placeholder="## Key Responsibilities

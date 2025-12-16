@@ -8,9 +8,9 @@ export const revalidate = 60;
 
 // Default data in case Supabase is not configured yet
 const defaultProfile = {
-  name: "Aean Gabrielle Tayawa",
-  headline: "Full Stack Developer",
-  bio: "Passionate developer specializing in modern web technologies, IoT solutions, and scalable applications. Building innovative solutions with React, Next.js, and cutting-edge technologies.",
+  name: "Aean Gabrielle D. Tayawa",
+  headline: "Remote Full Stack Developer based in Ilocos Norte, Philippines",
+  bio: "Full Stack Developer based in Ilocos Norte, Philippines, building modern web and IoT solutions for international clients and remote teams worldwide using React, Next.js, TypeScript, and cloud-native technologies.",
   github_url: "https://github.com",
   linkedin_url: "https://linkedin.com",
   email: "hello@aean.dev"

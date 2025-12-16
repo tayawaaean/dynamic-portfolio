@@ -102,8 +102,7 @@ export default function ContactPage() {
             Get In Touch
           </h1>
           <p className="text-xl text-muted max-w-3xl mx-auto">
-            Have a project in mind? Want to collaborate? Or just want to say hello? 
-            I'd love to hear from you. Let's create something amazing together.
+            Have a project in mind or need a remote Full Stack Developer? Whether you're based in Ilocos Norte, elsewhere in the Philippines, or anywhere in the world, I'd love to hear from you.
           </p>
         </div>
 

@@ -95,7 +95,7 @@ export default async function ExperiencePage() {
             Experience
           </h1>
           <p className="text-xl text-muted max-w-3xl mx-auto">
-            My professional journey in software development, from junior developer to senior roles, building scalable applications and leading teams.
+            My professional journey as a Full Stack Developer, collaborating remotely with international teams while delivering scalable applications from Ilocos Norte, Philippines.
           </p>
         </div>
 
